@@ -1,20 +1,17 @@
 import java.io.PrintStream;
-import java.util.List;
 
 public class Application {
     private PrintStream printStream;
-    private List<String> booksInTheLibrary;
+    private Library library;
 
-    public Application(PrintStream printStream, List<String> booksInTheLibrary) {
+    public Application(PrintStream printStream, Library library) {
+
         this.printStream = printStream;
-        this.booksInTheLibrary = booksInTheLibrary;
+        this.library = library;
     }
 
     public void start() {
-        printStream.println("Welcome to Biblioteca");
-
-        for(String bookTitle : booksInTheLibrary){
-            printStream.println(bookTitle + "\n");
-        }
+        printStream.println("Welcome to Biblioteca\n");
+        library.list();
     }
 }
