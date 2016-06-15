@@ -1,17 +1,38 @@
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
 public class Application {
     private PrintStream printStream;
-    private Library library;
+    private Menu menu;
+    private BufferedReader bufferedReader;
 
-    public Application(PrintStream printStream, Library library) {
+    public Application(PrintStream printStream, Menu menu, BufferedReader bufferedReader) {
 
         this.printStream = printStream;
-        this.library = library;
+        this.menu = menu;
+        this.bufferedReader = bufferedReader;
     }
 
     public void start() {
         printStream.println("Welcome to Biblioteca\n");
-        library.list();
+        menu.display();
+        String userOption = getUserInput();
+        menu.execute(userOption );
+    }
+
+    private String getUserInput() {
+        String optionSelected = "";
+        try {
+          optionSelected = bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return  optionSelected;
     }
 }
+
+//can execute the list library command
+// if the selected the right one
+//if not it just won't execute anything

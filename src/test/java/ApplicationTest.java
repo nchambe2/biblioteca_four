@@ -1,23 +1,28 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class ApplicationTest {
 
     private Application application;
     private PrintStream printStream;
-    private Library library;
+    private Menu menu;
+    private BufferedReader bufferedReader;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
-        library = mock(Library.class);
-        application = new Application(printStream, library);
+        menu = mock(Menu.class);
+        bufferedReader = mock(BufferedReader.class);
+        application = new Application(printStream, menu, bufferedReader);
     }
 
     @Test
@@ -27,11 +32,21 @@ public class ApplicationTest {
         verify(printStream).println(contains("Welcome"));
     }
 
+
     @Test
-    public void shouldListLibraryBookTitlesWhenWelcomeMessageHasBeenDisplayed() {
+    public void shouldDisplayMenuOptionWhenWelcomeMessageHasBeenDisplayed() {
         application.start();
 
-        verify(library).list();
+        verify(menu).display();
+    }
+
+    @Test
+    public void shouldExecuteMenuCommandWhenUserEntersASelection() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("jfklsdja");
+
+        application.start();
+
+        verify(menu).execute("jfklsdja");
     }
 
 }
