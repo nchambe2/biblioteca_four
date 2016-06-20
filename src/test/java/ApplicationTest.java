@@ -1,4 +1,5 @@
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -34,7 +35,9 @@ public class ApplicationTest {
 
 
     @Test
-    public void shouldDisplayMenuOptionWhenWelcomeMessageHasBeenDisplayed() {
+    public void shouldDisplayMenuOptionWhenWelcomeMessageHasBeenDisplayed() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("1").thenReturn("0");
+
         application.start();
 
         verify(menu).display();
@@ -47,6 +50,14 @@ public class ApplicationTest {
         application.start();
 
         verify(menu).execute("jfklsdja");
+    }
+
+    @Ignore
+    @Test
+    public void shouldQuitApplicationWhenUserCommandIsZero() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("0");
+
+        application.start();
     }
 
 }

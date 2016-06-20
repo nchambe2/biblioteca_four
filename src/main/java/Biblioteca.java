@@ -1,8 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Biblioteca {
     public static void main(String[] args) {
@@ -13,20 +12,14 @@ public class Biblioteca {
         bookTitles.add(parableOfTheSower);
         bookTitles.add(harryPotter);
         Library library = new Library(bookTitles);
-        Menu menu = new Menu(printStream, library);
+        Map<Integer, String> menuCommands = new LinkedHashMap<>();
+        menuCommands.put(0, "Quit");
+        menuCommands.put(1, "List Books");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        Menu menu = new Menu(printStream, library, menuCommands, bufferedReader);
         Application application = new Application(printStream, menu, bufferedReader);
-        
+
         application.start();
     }
 }
 
-//now we need a menu class done
-//should be injected into application done
-//Print the menu option done
-//who should get the input from the user????
-//menu could but is that the menu's job??
-//Is that the library's job
-//Is that the application's job = applications
-//get input from the user done
-//and then check to see if the input corresponds to the menu option

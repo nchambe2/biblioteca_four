@@ -15,10 +15,14 @@ public class Application {
     }
 
     public void start() {
+        String userOption = "";
         printStream.println("Welcome to Biblioteca\n");
-        menu.display();
-        String userOption = getUserInput();
-        menu.execute(userOption );
+
+        do {
+            menu.display();
+            userOption = getUserInput();
+            menu.execute(userOption);
+        } while(!userOption.equals("0"));
     }
 
     private String getUserInput() {
@@ -33,6 +37,4 @@ public class Application {
     }
 }
 
-//can execute the list library command
-// if the selected the right one
-//if not it just won't execute anything
+
