@@ -12,15 +12,15 @@ public class Biblioteca {
         bookTitles.add(parableOfTheSower);
         bookTitles.add(harryPotter);
         Library library = new Library(bookTitles);
-        Map<Integer, String> menuCommands = new LinkedHashMap<>();
-        menuCommands.put(0, "Quit");
-        menuCommands.put(1, "List Books");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         Map<String, Command> libraryCommands = new HashMap<>();
         Command listBookCommand = new ListBookCommand(library);
+        Command quitCommand = new QuitCommand(printStream);
+        libraryCommands.put("0", quitCommand);
         libraryCommands.put("1", listBookCommand);
-        Menu menu = new Menu(printStream, library, menuCommands, libraryCommands);
-        Application application = new Application(printStream, menu, bufferedReader);
+        Menu menu = new Menu(printStream, libraryCommands);
+        MenuValidator menuValidator = new MenuValidator(menu, printStream, libraryCommands);
+        Application application = new Application(printStream, menu, bufferedReader, menuValidator);
 
         application.start();
     }

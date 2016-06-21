@@ -1,4 +1,4 @@
-public class ListBookCommand implements Command {
+public class ListBookCommand implements Command{
     private Library library;
 
     public ListBookCommand(Library library) {
@@ -8,6 +8,11 @@ public class ListBookCommand implements Command {
     @Override
     public void run() {
         library.list();
+    }
+
+    @Override
+    public String name() {
+        return "List Books";
     }
 }
 

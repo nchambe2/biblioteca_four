@@ -6,12 +6,14 @@ public class Application {
     private PrintStream printStream;
     private Menu menu;
     private BufferedReader bufferedReader;
+    private MenuValidator menuValidator;
 
-    public Application(PrintStream printStream, Menu menu, BufferedReader bufferedReader) {
+    public Application(PrintStream printStream, Menu menu, BufferedReader bufferedReader, MenuValidator menuValidator) {
 
         this.printStream = printStream;
         this.menu = menu;
         this.bufferedReader = bufferedReader;
+        this.menuValidator = menuValidator;
     }
 
     public void start() {
@@ -21,8 +23,7 @@ public class Application {
         do {
             menu.display();
             userOption = getUserInput();
-            menu.execute(userOption);
-            menu.executex(userOption);
+            menuValidator.validate(userOption);
         } while(!userOption.equals("0"));
     }
 
