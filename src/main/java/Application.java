@@ -22,6 +22,7 @@ public class Application {
             menu.display();
             userOption = getUserInput();
             menu.execute(userOption);
+            menu.executex(userOption);
         } while(!userOption.equals("0"));
     }
 

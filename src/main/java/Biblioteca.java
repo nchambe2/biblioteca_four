@@ -16,7 +16,10 @@ public class Biblioteca {
         menuCommands.put(0, "Quit");
         menuCommands.put(1, "List Books");
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Menu menu = new Menu(printStream, library, menuCommands, bufferedReader);
+        Map<String, Command> libraryCommands = new HashMap<>();
+        Command listBookCommand = new ListBookCommand(library);
+        libraryCommands.put("1", listBookCommand);
+        Menu menu = new Menu(printStream, library, menuCommands, libraryCommands);
         Application application = new Application(printStream, menu, bufferedReader);
 
         application.start();
