@@ -7,7 +7,7 @@ public class ListBookCommand implements Command{
 
     @Override
     public void run() {
-        library.list();
+        library.listCheckedInBooks();
     }
 
     @Override

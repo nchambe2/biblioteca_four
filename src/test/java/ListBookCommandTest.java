@@ -21,7 +21,7 @@ public class ListBookCommandTest  {
     public void shouldListLibraryBooksWhenListBookCommandIsRun() {
         listBookCommand.run();
 
-        verify(library).list();
+        verify(library).listCheckedInBooks();
     }
 
     @Test

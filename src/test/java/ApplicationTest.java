@@ -27,7 +27,8 @@ public class ApplicationTest {
     }
 
     @Test
-    public void shouldDisplayWelcomeMessageWhenApplicationStarts() {
+    public void shouldDisplayWelcomeMessageWhenApplicationStarts() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("0");
         application.start();
 
         verify(printStream).println(contains("Welcome"));
@@ -35,7 +36,7 @@ public class ApplicationTest {
 
     @Test
     public void shouldDisplayMenuOptionWhenWelcomeMessageHasBeenDisplayed() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("1").thenReturn("0");
+        when(bufferedReader.readLine()).thenReturn("0");
 
         application.start();
 

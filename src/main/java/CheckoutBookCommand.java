@@ -1,5 +1,19 @@
-/**
- * Created by nicollettec on 6/21/16.
- */
-public class CheckoutBookCommand {
+public class CheckoutBookCommand implements Command {
+
+    private Library library;
+
+    public CheckoutBookCommand(Library library) {
+
+        this.library = library;
+    }
+
+    @Override
+    public void run() {
+        library.checkout();
+    }
+
+    @Override
+    public String name() {
+        return "Checkout Books";
+    }
 }

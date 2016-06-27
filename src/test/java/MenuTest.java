@@ -3,21 +3,18 @@ import org.junit.Test;
 
 import java.io.PrintStream;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.mockito.Matchers.contains;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MenuTest {
-
     private Menu menu;
     private PrintStream printStream;
     private Map<String, Command> libraryCommands;
     private Command listBookCommand;
     private Command quitCommand;
+    private Command checkoutBookCommand;
 
     @Before
     public void setUp() {
@@ -25,8 +22,10 @@ public class MenuTest {
         libraryCommands = new HashMap<>();
         listBookCommand = mock(ListBookCommand.class);
         quitCommand = mock(QuitCommand.class);
-        libraryCommands.put("1", listBookCommand);
+        checkoutBookCommand = mock(CheckoutBookCommand.class);
         libraryCommands.put("0", quitCommand);
+        libraryCommands.put("1", listBookCommand);
+        libraryCommands.put("2", checkoutBookCommand);
         menu = new Menu(printStream, libraryCommands);
     }
 
@@ -48,6 +47,15 @@ public class MenuTest {
         menu.display();
 
         verify(printStream).println(contains("List Books"));
+    }
+
+    @Test
+    public void shouldPrintCheckoutBookOptionWhenMenuIsDisplayed(){
+        when(checkoutBookCommand.name()).thenReturn("Checkout Books");
+
+        menu.display();
+
+        verify(printStream).println(contains("Checkout Books"));
     }
 
     @Test
