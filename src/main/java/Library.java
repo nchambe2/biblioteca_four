@@ -16,7 +16,8 @@ public class Library {
         }
     }
     public void checkout(int bookIndex) {
-            checkedInBooks.remove(bookIndex);
+        checkedInBooks.remove(bookIndex);
+        printStream.println("Thank you! Enjoy the book");
     }
 
 }

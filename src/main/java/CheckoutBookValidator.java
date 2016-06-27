@@ -13,6 +13,7 @@ public class CheckoutBookValidator {
     }
 
     public void validate() {
+        library.listCheckedInBooks();
         String bookToCheckout = input.getUserInput();
 
         int bookIndex = Integer.parseInt(bookToCheckout) - 1;

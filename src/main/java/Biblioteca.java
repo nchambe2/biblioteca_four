@@ -21,7 +21,7 @@ public class Biblioteca {
         Command quitCommand = new QuitCommand(printStream);
         Command listBookCommand = new ListBookCommand(library);
         CheckoutBookValidator checkoutBookValidator = new CheckoutBookValidator(library, checkedInBooks, input);
-        Command checkoutBookCommand = new CheckoutBookCommand(library, checkoutBookValidator);
+        Command checkoutBookCommand = new CheckoutBookCommand(checkoutBookValidator);
         libraryCommands.put("0", quitCommand);
         libraryCommands.put("1", listBookCommand);
         libraryCommands.put("2", checkoutBookCommand);
@@ -30,21 +30,6 @@ public class Biblioteca {
         Application application = new Application(printStream, menu, input, menuValidator);
 
         application.start();
-
-        //user can check out a book
-        //add it as a library command - done
-        //have it display in the menu - done
-        //should display all the books you can checkout
-        //validate if book exists
-        //get user input - done
-        //when run it should call library checkout
-        //library inject checked in books collection
-        //checked out books collection
-        //when checked out move it from checked in to checkout
-
-        //list all checked in books
-        //validate if library book is checked in
-        //then remove
     }
 }
 

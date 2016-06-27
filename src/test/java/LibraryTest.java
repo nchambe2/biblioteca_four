@@ -81,4 +81,15 @@ public class LibraryTest {
 
         assertThat(checkedInBooks.size(), is(1));
     }
+
+    @Test
+    public void shouldDisplaySuccessfulCheckoutMessageWhenBookHasBeenRemovedFromCheckedInBookList() {
+        when(input.getUserInput()).thenReturn("1");
+        checkedInBooks.add(bookOne);
+        checkedInBooks.add(bookTwo);
+
+        library.checkout(1);
+
+        verify(printStream).println("Thank you! Enjoy the book");
+    }
 }

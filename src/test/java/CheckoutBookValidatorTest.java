@@ -28,7 +28,18 @@ public class CheckoutBookValidatorTest {
     }
 
     @Test
-    public void shouldGetBookToCheckoutWhenUserInputIsCaptured() {
+    public void shouldListCheckedInBooksWhenValidateMethodIsInvoked() {
+        when(input.getUserInput()).thenReturn("1");
+
+        checkoutBookValidator.validate();
+
+        verify(library).listCheckedInBooks();
+    }
+
+    @Test
+    public void shouldGetUserInputWhenValidateMethodIsInvoked() {
+        when(input.getUserInput()).thenReturn("1");
+
         checkoutBookValidator.validate();
 
         verify(input).getUserInput();
