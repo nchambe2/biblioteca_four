@@ -20,7 +20,7 @@ public class Biblioteca {
         Map<String, Command> libraryCommands = new HashMap<>();
         Command quitCommand = new QuitCommand(printStream);
         Command listBookCommand = new ListBookCommand(library);
-        CheckoutBookValidator checkoutBookValidator = new CheckoutBookValidator(library, checkedInBooks, input);
+        CheckoutBookValidator checkoutBookValidator = new CheckoutBookValidator(library, checkedInBooks, input, printStream);
         Command checkoutBookCommand = new CheckoutBookCommand(checkoutBookValidator);
         libraryCommands.put("0", quitCommand);
         libraryCommands.put("1", listBookCommand);

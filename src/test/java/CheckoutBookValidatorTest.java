@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class CheckoutBookValidatorTest {
     private List<Book> checkedInBooks;
     private Input input;
     private CheckoutBookValidator checkoutBookValidator;
+    private PrintStream printStream;
 
     @Before
     public void setUp() {
@@ -24,7 +26,8 @@ public class CheckoutBookValidatorTest {
         checkedInBooks.add(bookOne);
         checkedInBooks.add(bookTwo);
         input = mock(Input.class);
-        checkoutBookValidator = new CheckoutBookValidator(library, checkedInBooks, input);
+        printStream = mock(PrintStream.class);
+        checkoutBookValidator = new CheckoutBookValidator(library, checkedInBooks, input, printStream);
     }
 
     @Test
@@ -53,6 +56,15 @@ public class CheckoutBookValidatorTest {
         checkoutBookValidator.validate();
 
         verify(library).checkout(0);
+    }
+
+    @Test
+    public void shouldDisplayUnSuccessfulCheckoutMessageWhenBookSelectedIsNotCheckedIn() {
+        when(input.getUserInput()).thenReturn("5");
+
+        checkoutBookValidator.validate();
+
+        verify(printStream).println("That book is not available.");
     }
 
 }

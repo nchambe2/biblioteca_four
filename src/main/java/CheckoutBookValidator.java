@@ -1,15 +1,18 @@
+import java.io.PrintStream;
 import java.util.List;
 
 public class CheckoutBookValidator {
     private Library library;
     private List<Book> checkedInBooks;
     private Input input;
+    private PrintStream printStream;
 
-    public CheckoutBookValidator(Library library, List<Book> checkedInBooks, Input input) {
+    public CheckoutBookValidator(Library library, List<Book> checkedInBooks, Input input, PrintStream printStream) {
 
         this.library = library;
         this.checkedInBooks = checkedInBooks;
         this.input = input;
+        this.printStream = printStream;
     }
 
     public void validate() {
@@ -20,6 +23,8 @@ public class CheckoutBookValidator {
 
         if(bookIndex < checkedInBooks.size()) {
             library.checkout(bookIndex);
+        } else {
+            printStream.println("That book is not available.");
         }
     }
 }
