@@ -15,17 +15,19 @@ public class Biblioteca {
         checkedInBooks.add(parableOfTheSower);
         checkedInBooks.add(harryPotter);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Library library = new Library(checkedInBooks, bufferedReader, printStream);
+        Input input = new Input(bufferedReader);
+        Library library = new Library(checkedInBooks, printStream);
         Map<String, Command> libraryCommands = new HashMap<>();
         Command quitCommand = new QuitCommand(printStream);
         Command listBookCommand = new ListBookCommand(library);
-        Command checkoutBookCommand = new CheckoutBookCommand(library);
+        CheckoutBookValidator checkoutBookValidator = new CheckoutBookValidator(library, checkedInBooks, input);
+        Command checkoutBookCommand = new CheckoutBookCommand(library, checkoutBookValidator);
         libraryCommands.put("0", quitCommand);
         libraryCommands.put("1", listBookCommand);
         libraryCommands.put("2", checkoutBookCommand);
         Menu menu = new Menu(printStream, libraryCommands);
         MenuValidator menuValidator = new MenuValidator(menu, printStream, libraryCommands);
-        Application application = new Application(printStream, menu, bufferedReader, menuValidator);
+        Application application = new Application(printStream, menu, input, menuValidator);
 
         application.start();
 
@@ -33,12 +35,16 @@ public class Biblioteca {
         //add it as a library command - done
         //have it display in the menu - done
         //should display all the books you can checkout
-        //get user input
         //validate if book exists
+        //get user input - done
         //when run it should call library checkout
         //library inject checked in books collection
         //checked out books collection
         //when checked out move it from checked in to checkout
+
+        //list all checked in books
+        //validate if library book is checked in
+        //then remove
     }
 }
 

@@ -19,17 +19,17 @@ public class LibraryTest {
     private Book bookOne;
     private Book bookTwo;
     private List<Book> checkedInBooks;
-    private BufferedReader bufferedReader;
     private PrintStream printStream;
+    private Input input;
 
     @Before
     public void setUp(){
         bookOne = mock(Book.class);
         bookTwo = mock(Book.class);
         checkedInBooks = new ArrayList<>();
-        bufferedReader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
-        library = new Library(checkedInBooks, bufferedReader, printStream);
+        input = mock(Input.class);
+        library = new Library(checkedInBooks,printStream);
     }
 
     @Test
@@ -72,12 +72,12 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldCheckoutBook() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("1");
+    public void shouldRemoveBookFromCheckedInListWhenBookIsCheckedOut() throws IOException {
+        when(input.getUserInput()).thenReturn("1");
         checkedInBooks.add(bookOne);
         checkedInBooks.add(bookTwo);
 
-        library.checkout();
+        library.checkout(1);
 
         assertThat(checkedInBooks.size(), is(1));
     }

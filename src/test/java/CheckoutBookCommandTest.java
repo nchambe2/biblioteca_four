@@ -10,28 +10,40 @@ public class CheckoutBookCommandTest {
 
     private Library library;
     private CheckoutBookCommand checkoutBookCommand;
+    private CheckoutBookValidator checkoutBookValidator;
 
     @Before
     public void setUp() {
         library = mock(Library.class);
-        checkoutBookCommand = new CheckoutBookCommand(library);
+        checkoutBookValidator = mock(CheckoutBookValidator.class);
+        checkoutBookCommand = new CheckoutBookCommand(library, checkoutBookValidator);
     }
 
     @Test
     public void shouldDisplayCheckoutBookWhenNameIsCalled() {
         library = mock(Library.class);
-        checkoutBookCommand = new CheckoutBookCommand(library);
+        checkoutBookCommand = new CheckoutBookCommand(library, checkoutBookValidator);
 
         assertThat(checkoutBookCommand.name(), is("Checkout Books"));
     }
 
     @Test
-    public void shouldCheckoutBookWhenCommandisRun() {
+    public void shouldCheckoutBookWhenCommandIsRun() {
         library = mock(Library.class);
-        checkoutBookCommand = new CheckoutBookCommand(library);
+        checkoutBookCommand = new CheckoutBookCommand(library, checkoutBookValidator);
 
         checkoutBookCommand.run();
 
-        verify(library).checkout();
+        verify(library).checkout(1);
+    }
+
+    @Test
+    public void shouldCheckoutBookWhenCommandIsRunX() {
+        library = mock(Library.class);
+        checkoutBookCommand = new CheckoutBookCommand(library, checkoutBookValidator);
+
+        checkoutBookCommand.run();
+
+        verify(checkoutBookValidator).validate();
     }
 }

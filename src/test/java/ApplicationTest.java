@@ -16,6 +16,7 @@ public class ApplicationTest {
     private Menu menu;
     private BufferedReader bufferedReader;
     private MenuValidator menuValidator;
+    private Input input;
 
     @Before
     public void setUp() {
@@ -23,12 +24,13 @@ public class ApplicationTest {
         menu = mock(Menu.class);
         bufferedReader = mock(BufferedReader.class);
         menuValidator = mock(MenuValidator.class);
-        application = new Application(printStream, menu, bufferedReader, menuValidator);
+        input = mock(Input.class);
+        application = new Application(printStream, menu, input, menuValidator);
     }
 
     @Test
     public void shouldDisplayWelcomeMessageWhenApplicationStarts() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("0");
+        when(input.getUserInput()).thenReturn("0");
         application.start();
 
         verify(printStream).println(contains("Welcome"));
@@ -36,7 +38,7 @@ public class ApplicationTest {
 
     @Test
     public void shouldDisplayMenuOptionWhenWelcomeMessageHasBeenDisplayed() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("0");
+        when(input.getUserInput()).thenReturn("0");
 
         application.start();
 
@@ -46,7 +48,7 @@ public class ApplicationTest {
 
     @Test
     public void shouldValidateMenuCommandWhenUserInputIsOne() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("1").thenReturn("0");
+        when(input.getUserInput()).thenReturn("1").thenReturn("0");
 
         application.start();
 
@@ -56,7 +58,7 @@ public class ApplicationTest {
     @Ignore
     @Test
     public void shouldQuitApplicationWhenUserCommandIsZero() throws IOException {
-        when(bufferedReader.readLine()).thenReturn("0");
+        when(input.getUserInput()).thenReturn("0");
 
         application.start();
     }
