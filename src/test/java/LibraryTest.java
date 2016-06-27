@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class LibraryTest {
     private Library library;
     private Book bookOne;
     private Book bookTwo;
-    private Map<String, Book> checkedInBooks;
+    private List<Book> checkedInBooks;
     private BufferedReader bufferedReader;
     private PrintStream printStream;
 
@@ -25,15 +26,15 @@ public class LibraryTest {
     public void setUp(){
         bookOne = mock(Book.class);
         bookTwo = mock(Book.class);
-        checkedInBooks = new HashMap<>();
+        checkedInBooks = new ArrayList<>();
         bufferedReader = mock(BufferedReader.class);
         printStream = mock(PrintStream.class);
         library = new Library(checkedInBooks, bufferedReader, printStream);
     }
 
     @Test
-    public void shouldDisplayBookTitleWhenThereIsOneBookIntheLibraryX(){
-        checkedInBooks.put("1", bookOne);
+    public void shouldInvokeDetailsMethodOnceWhenThereIsOneBookInTheLibrary(){
+        checkedInBooks.add(bookOne);
 
         library.listCheckedInBooks();
 
@@ -41,9 +42,18 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldDisplayBookTitleWhenThereIsMultipleBooksInTheLibrary(){
-        checkedInBooks.put("1", bookOne);
-        checkedInBooks.put("1", bookTwo);
+    public void shouldDisplayBookTitleWhenThereIsOneBookInTheLibrary(){
+        checkedInBooks.add(bookOne);
+
+        library.listCheckedInBooks();
+
+        verify(printStream).println(contains("1."));
+    }
+
+    @Test
+    public void shouldInvokeDetailsMethodTwiceWhenThereAreMultipleBooksInTheLibrary(){
+        checkedInBooks.add(bookOne);
+        checkedInBooks.add(bookTwo);
 
         library.listCheckedInBooks();
 
@@ -52,9 +62,20 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldCheckoutBook() {
-        checkedInBooks.put("1", bookOne);
-        checkedInBooks.put("1", bookTwo);
+    public void shouldDisplayTwoBookTitlesWhenThereAreMultipleBooksInTheLibrary(){
+        checkedInBooks.add(bookOne);
+        checkedInBooks.add(bookTwo);
+
+        library.listCheckedInBooks();
+
+        verify(printStream).println(contains("2."));
+    }
+
+    @Test
+    public void shouldCheckoutBook() throws IOException {
+        when(bufferedReader.readLine()).thenReturn("1");
+        checkedInBooks.add(bookOne);
+        checkedInBooks.add(bookTwo);
 
         library.checkout();
 

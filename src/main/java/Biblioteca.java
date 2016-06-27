@@ -7,13 +7,13 @@ public class Biblioteca {
     public static void main(String[] args) {
         PrintStream printStream = new PrintStream(System.out);
         List<Book> bookTitles = new ArrayList<>();
-        Book parableOfTheSower = new Book(printStream, "Parable of the Sower", "Octavia Butler", "1993");
-        Book harryPotter = new Book(printStream, "Harry Potter and the Chamber of Secrets", "JK Rowling", "1999");
+        Book parableOfTheSower = new Book("Parable of the Sower", "Octavia Butler", "1993");
+        Book harryPotter = new Book("Harry Potter and the Chamber of Secrets", "JK Rowling", "1999");
         bookTitles.add(parableOfTheSower);
         bookTitles.add(harryPotter);
-        Map<String, Book> checkedInBooks = new HashMap<>();
-        checkedInBooks.put("1", parableOfTheSower);
-        checkedInBooks.put("2", harryPotter);
+        List<Book> checkedInBooks = new ArrayList<>();
+        checkedInBooks.add(parableOfTheSower);
+        checkedInBooks.add(harryPotter);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         Library library = new Library(checkedInBooks, bufferedReader, printStream);
         Map<String, Command> libraryCommands = new HashMap<>();

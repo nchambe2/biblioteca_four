@@ -2,31 +2,31 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
-import java.util.Map;
 
 public class Library {
-    private Map<String, Book> checkedInBooks;
+    private List<Book> checkedInBooks;
     private BufferedReader bufferedReader;
     private PrintStream printStream;
 
-    public Library(Map<String, Book> checkedInBooks, BufferedReader bufferedReader, PrintStream printStream) {
+    public Library(List<Book> checkedInBooks, BufferedReader bufferedReader, PrintStream printStream) {
         this.checkedInBooks = checkedInBooks;
         this.bufferedReader = bufferedReader;
         this.printStream = printStream;
     }
 
     public void listCheckedInBooks() {
-        for(Map.Entry<String, Book> book : checkedInBooks.entrySet()){
-            book.getValue().details();
+        for(Book book : checkedInBooks){
+            printStream.println((checkedInBooks.indexOf(book) + 1) + ". " + book.details());
         }
     }
     public void checkout() {
-        String bookToCheckoutKey = getUserInput();
+        String bookToCheckout = getUserInput();
+        int bookIndex = Integer.parseInt(bookToCheckout) - 1;
 
-        if(checkedInBooks.containsKey(bookToCheckoutKey)) {
-            checkedInBooks.remove(bookToCheckoutKey);
+        if(bookIndex < checkedInBooks.size()) {
+            checkedInBooks.remove(bookIndex);
         } else {
-            printStream.println("Book is not availbe");
+            printStream.println("Book is not available");
         }
     }
 
