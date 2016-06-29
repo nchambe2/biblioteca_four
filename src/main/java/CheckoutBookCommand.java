@@ -1,15 +1,15 @@
 public class CheckoutBookCommand implements Command {
 
-    private CheckoutBookValidator checkoutBookValidator;
+    private LibraryValidator checkoutBookValidator;
 
-    public CheckoutBookCommand(CheckoutBookValidator checkoutBookValidator) {
+    public CheckoutBookCommand(LibraryValidator checkoutBookValidator) {
 
         this.checkoutBookValidator = checkoutBookValidator;
     }
 
     @Override
     public void run() {
-        checkoutBookValidator.validate();
+        checkoutBookValidator.validateIfBookIsCheckedIn();
     }
 
     @Override

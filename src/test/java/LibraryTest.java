@@ -18,18 +18,21 @@ public class LibraryTest {
     private Library library;
     private Book bookOne;
     private Book bookTwo;
+    private Book bookThree;
     private List<Book> checkedInBooks;
     private PrintStream printStream;
-    private Input input;
+    private List<Book> checkedOutBooks;
+
 
     @Before
     public void setUp(){
         bookOne = mock(Book.class);
         bookTwo = mock(Book.class);
+        bookThree = mock(Book.class);
         checkedInBooks = new ArrayList<>();
+        checkedOutBooks = new ArrayList<>();
         printStream = mock(PrintStream.class);
-        input = mock(Input.class);
-        library = new Library(checkedInBooks,printStream);
+        library = new Library(checkedInBooks, checkedOutBooks, printStream);
     }
 
     @Test
@@ -73,7 +76,6 @@ public class LibraryTest {
 
     @Test
     public void shouldRemoveBookFromCheckedInListWhenBookIsCheckedOut() throws IOException {
-        when(input.getUserInput()).thenReturn("1");
         checkedInBooks.add(bookOne);
         checkedInBooks.add(bookTwo);
 
@@ -84,7 +86,6 @@ public class LibraryTest {
 
     @Test
     public void shouldDisplaySuccessfulCheckoutMessageWhenBookHasBeenRemovedFromCheckedInBookList() {
-        when(input.getUserInput()).thenReturn("1");
         checkedInBooks.add(bookOne);
         checkedInBooks.add(bookTwo);
 
@@ -92,4 +93,23 @@ public class LibraryTest {
 
         verify(printStream).println("Thank you! Enjoy the book");
     }
+
+    @Test
+    public void shouldRemoveBookFromCheckedOutBookWhenBookIsReturned() {
+        checkedOutBooks.add(bookThree);
+
+        library.returnBook(0);
+
+        assertThat(checkedOutBooks.size(), is(0));
+    }
+
+    @Test
+    public void shouldDisplaySuccessfulReturnMessageWhenBookHasBeenReturned() {
+        checkedOutBooks.add(bookThree);
+
+        library.returnBook(0);
+
+        verify(printStream).println("Thank you for returning the book.");
+    }
+
 }

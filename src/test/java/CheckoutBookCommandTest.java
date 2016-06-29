@@ -9,11 +9,11 @@ import static org.mockito.Mockito.verify;
 public class CheckoutBookCommandTest {
 
     private CheckoutBookCommand checkoutBookCommand;
-    private CheckoutBookValidator checkoutBookValidator;
+    private LibraryValidator checkoutBookValidator;
 
     @Before
     public void setUp() {
-        checkoutBookValidator = mock(CheckoutBookValidator.class);
+        checkoutBookValidator = mock(LibraryValidator.class);
         checkoutBookCommand = new CheckoutBookCommand(checkoutBookValidator);
     }
 
@@ -27,6 +27,6 @@ public class CheckoutBookCommandTest {
     public void shouldCheckoutBookWhenCommandIsRun() {
         checkoutBookCommand.run();
 
-        verify(checkoutBookValidator).validate();
+        verify(checkoutBookValidator).validateIfBookIsCheckedIn();
     }
 }

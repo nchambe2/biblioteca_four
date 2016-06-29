@@ -6,21 +6,21 @@ import java.util.*;
 public class Biblioteca {
     public static void main(String[] args) {
         PrintStream printStream = new PrintStream(System.out);
-        List<Book> bookTitles = new ArrayList<>();
         Book parableOfTheSower = new Book("Parable of the Sower", "Octavia Butler", "1993");
         Book harryPotter = new Book("Harry Potter and the Chamber of Secrets", "JK Rowling", "1999");
-        bookTitles.add(parableOfTheSower);
-        bookTitles.add(harryPotter);
+        Book gameOfThrones = new Book("Game of Thrones", "George R.R. Martin", "1996");
         List<Book> checkedInBooks = new ArrayList<>();
+        List<Book> checkedOutBooks = new ArrayList<>();
         checkedInBooks.add(parableOfTheSower);
         checkedInBooks.add(harryPotter);
+        checkedOutBooks.add(gameOfThrones);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         Input input = new Input(bufferedReader);
-        Library library = new Library(checkedInBooks, printStream);
+        Library library = new Library(checkedInBooks, checkedOutBooks, printStream);
         Map<String, Command> libraryCommands = new HashMap<>();
         Command quitCommand = new QuitCommand(printStream);
         Command listBookCommand = new ListBookCommand(library);
-        CheckoutBookValidator checkoutBookValidator = new CheckoutBookValidator(library, checkedInBooks, input, printStream);
+        LibraryValidator checkoutBookValidator = new LibraryValidator(library, checkedInBooks, checkedOutBooks, input, printStream);
         Command checkoutBookCommand = new CheckoutBookCommand(checkoutBookValidator);
         libraryCommands.put("0", quitCommand);
         libraryCommands.put("1", listBookCommand);
