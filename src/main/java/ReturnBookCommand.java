@@ -13,6 +13,6 @@ public class ReturnBookCommand implements Command {
 
     @Override
     public String name() {
-        return null;
+        return "Return Book";
     }
 }
