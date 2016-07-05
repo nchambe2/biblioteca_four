@@ -47,6 +47,18 @@ public class LibraryValidator {
         }
     }
 
+    public void validate(List<Book> bookCatalog, String successMessage, String unsuccessfulMessage) {
+        String bookToCheckIn = input.getUserInput();
+
+        int bookIndex = Integer.parseInt(bookToCheckIn) - 1;
+
+        if(bookIndex < bookCatalog.size()) {
+            library.removeBookFrom(bookCatalog, bookIndex, successMessage);
+        } else {
+            printStream.println(unsuccessfulMessage);
+        }
+    }
+
     private String successfulCheckoutMessage() {
         return "Thank you! Enjoy the book";
     }
