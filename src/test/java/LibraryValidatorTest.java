@@ -32,36 +32,19 @@ public class LibraryValidatorTest {
         printStream = mock(PrintStream.class);
         checkedOutBooks = new ArrayList<>();
         checkedOutBooks.add(bookThree);
-        libraryValidator = new LibraryValidator(library, checkedInBooks, checkedOutBooks, input, printStream);
+        libraryValidator = new LibraryValidator(library, checkedOutBooks, input, printStream);
     }
 
     @Test
-    public void shouldPromptUserToSelectBookWhenCheckingOut() {
+    public void shouldGetUserInputWhenValidateMethodIsCalled() {
         when(input.getUserInput()).thenReturn("1");
 
-        libraryValidator.validateIfBookIsCheckedIn();
-
-        verify(printStream).println(contains("book you want to checkout:"));
-    }
-
-    @Test
-    public void shouldGetUserInputWhenUserHasBeenPromptedToCheckoutABook() {
-        when(input.getUserInput()).thenReturn("1");
-
-        libraryValidator.validateIfBookIsCheckedIn();
+        libraryValidator.validate(checkedInBooks, successfulCheckoutMessage(), unsuccessfulCheckOutMessage());
 
         verify(input).getUserInput();
 
     }
 
-    @Test
-    public void shouldCheckoutBookWhenBookSelectedIsCheckedIn() {
-        when(input.getUserInput()).thenReturn("1");
-
-        libraryValidator.validateIfBookIsCheckedIn();
-
-        verify(library).removeBookFrom(checkedInBooks,0, successfulCheckoutMessage());
-    }
 
     @Test
     public void shouldPromptUserToSelectBookWhenReturning() {
@@ -100,7 +83,7 @@ public class LibraryValidatorTest {
     }
 
     @Test
-    public void shouldCheckoutBookWhenBookSelectedIsCheckedInx() {
+    public void shouldCheckoutBookWhenBookSelectedIsCheckedIn() {
         when(input.getUserInput()).thenReturn("1");
 
         libraryValidator.validate(checkedInBooks, successfulCheckoutMessage(), unsuccessfulReturnMessage());

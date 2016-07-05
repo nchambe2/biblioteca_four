@@ -17,7 +17,6 @@ public class CheckoutBookCommand implements Command {
     @Override
     public void run() {
         printStream.println("Enter the number that corresponds to the book you want to checkout:");
-       // checkoutBookValidator.validateIfBookIsCheckedIn();
         checkoutBookValidator.validate(checkedInBooks, "Thank you! Enjoy the book", "That book can't be checked in.");
     }
 

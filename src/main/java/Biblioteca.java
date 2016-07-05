@@ -20,9 +20,9 @@ public class Biblioteca {
         Map<String, Command> libraryCommands = new HashMap<>();
         Command quitCommand = new QuitCommand(printStream);
         Command listBookCommand = new ListBookCommand(library);
-        LibraryValidator libraryValidator = new LibraryValidator(library, checkedInBooks, checkedOutBooks, input, printStream);
+        LibraryValidator libraryValidator = new LibraryValidator(library, checkedOutBooks, input, printStream);
         Command checkoutBookCommand = new CheckoutBookCommand(libraryValidator, printStream, checkedInBooks);
-        Command returnBookCommand = new ReturnBookCommand(libraryValidator);
+        Command returnBookCommand = new ReturnBookCommand(libraryValidator, printStream, checkedOutBooks);
         libraryCommands.put("0", quitCommand);
         libraryCommands.put("1", listBookCommand);
         libraryCommands.put("2", checkoutBookCommand);
