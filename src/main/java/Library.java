@@ -26,4 +26,8 @@ public class Library {
         checkedOutBooks.remove(bookIndex);
         printStream.println("Thank you for returning the book.");
     }
+
+    public void removeBookFrom(List<Book> bookCatalog, int bookIndex) {
+        bookCatalog.remove(bookIndex);
+    }
 }

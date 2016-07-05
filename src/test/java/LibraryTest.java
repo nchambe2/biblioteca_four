@@ -112,4 +112,22 @@ public class LibraryTest {
         verify(printStream).println("Thank you for returning the book.");
     }
 
+    @Test
+    public void shouldRemoveBookFromCheckedInBooksList() {
+        checkedInBooks.add(bookOne);
+
+        library.removeBookFrom(checkedInBooks, 0);
+
+        assertThat(checkedInBooks.size(), is(0));
+    }
+
+    @Test
+    public void shouldRemoveBookFromCheckedOutBooksList() {
+        checkedOutBooks.add(bookOne);
+
+        library.removeBookFrom(checkedOutBooks, 0);
+
+        assertThat(checkedOutBooks.size(), is(0));
+    }
+
 }
