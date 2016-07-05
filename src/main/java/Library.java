@@ -17,7 +17,7 @@ public class Library {
             printStream.println((checkedInBooks.indexOf(book) + 1) + ". " + book.details());
         }
     }
-    
+
     public void removeBookFrom(List<Book> bookCatalog, int bookIndex, String successMessage) {
         bookCatalog.remove(bookIndex);
         printStream.println(successMessage);

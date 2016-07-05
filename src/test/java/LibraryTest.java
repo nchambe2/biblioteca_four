@@ -32,7 +32,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldInvokeDetailsMethodOnceWhenThereIsOneBookInTheLibrary(){
+    public void shouldInvokeDetailsMethodOnceWhenThereIsOneBookCheckedIn(){
         checkedInBooks.add(bookOne);
 
         library.listCheckedInBooks();
@@ -41,7 +41,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldInvokeDetailsMethodTwiceWhenThereAreMultipleBooksInTheLibrary(){
+    public void shouldInvokeDetailsMethodTwiceWhenThereAreMultipleBooksCheckedIn(){
         checkedInBooks.add(bookOne);
         checkedInBooks.add(bookTwo);
 
@@ -52,7 +52,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldDisplayBookTitleWhenThereIsOneBookInTheLibrary(){
+    public void shouldDisplayBookTitleWhenThereIsOneBookCheckedIn(){
         checkedInBooks.add(bookOne);
 
         library.listCheckedInBooks();
@@ -62,7 +62,7 @@ public class LibraryTest {
 
 
     @Test
-    public void shouldDisplayTwoBookTitlesWhenThereAreMultipleBooksInTheLibrary(){
+    public void shouldDisplayTwoBookTitlesWhenThereAreMultipleBooksCheckedIn(){
         checkedInBooks.add(bookOne);
         checkedInBooks.add(bookTwo);
 
