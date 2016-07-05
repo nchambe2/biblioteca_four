@@ -18,13 +18,17 @@ public class LibraryValidator {
     }
 
     public void validateIfBookIsCheckedIn() {
+        //should just be validating
+        //should not be prompting
+        //getting input
+        //and validating
         printStream.println("Enter the number that corresponds to the book you want to checkout:");
         String bookToCheckout = input.getUserInput();
 
         int bookIndex = Integer.parseInt(bookToCheckout) - 1;
 
         if(bookIndex < checkedInBooks.size()) {
-            library.checkout(bookIndex);
+            library.removeBookFrom(checkedInBooks, bookIndex);
         } else {
             printStream.println("That book is not available.");
         }
@@ -37,7 +41,7 @@ public class LibraryValidator {
         int bookIndex = Integer.parseInt(bookToCheckIn) - 1;
 
         if(bookIndex < checkedOutBooks.size()) {
-            library.returnBook(bookIndex);
+            library.removeBookFrom(checkedOutBooks, bookIndex);
         } else {
             printStream.println("That is not a valid book to return.");
         }
