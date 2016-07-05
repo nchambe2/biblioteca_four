@@ -36,7 +36,7 @@ public class LibraryValidator {
 
     public void validateIfBookIsCheckedOut() {
         printStream.println("Enter the number that corresponds to the book you want to return:");
-        String bookToCheckIn= input.getUserInput();
+        String bookToCheckIn = input.getUserInput();
 
         int bookIndex = Integer.parseInt(bookToCheckIn) - 1;
 
@@ -66,4 +66,5 @@ public class LibraryValidator {
     private String successfulReturnMessage() {
         return "Thank you for returning the book.";
     }
+
 }

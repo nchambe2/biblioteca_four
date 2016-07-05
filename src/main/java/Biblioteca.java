@@ -21,7 +21,7 @@ public class Biblioteca {
         Command quitCommand = new QuitCommand(printStream);
         Command listBookCommand = new ListBookCommand(library);
         LibraryValidator libraryValidator = new LibraryValidator(library, checkedInBooks, checkedOutBooks, input, printStream);
-        Command checkoutBookCommand = new CheckoutBookCommand(libraryValidator);
+        Command checkoutBookCommand = new CheckoutBookCommand(libraryValidator, printStream, checkedInBooks);
         Command returnBookCommand = new ReturnBookCommand(libraryValidator);
         libraryCommands.put("0", quitCommand);
         libraryCommands.put("1", listBookCommand);
