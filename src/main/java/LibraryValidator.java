@@ -28,22 +28,30 @@ public class LibraryValidator {
         int bookIndex = Integer.parseInt(bookToCheckout) - 1;
 
         if(bookIndex < checkedInBooks.size()) {
-            library.removeBookFrom(checkedInBooks, bookIndex, "Thank you! Enjoy the book");
+            library.removeBookFrom(checkedInBooks, bookIndex, successfulCheckoutMessage());
         } else {
             printStream.println("That book is not available.");
         }
     }
 
     public void validateIfBookIsCheckedOut() {
-        printStream.println("Enter the number that corresponds to the book you want to check in:");
+        printStream.println("Enter the number that corresponds to the book you want to return:");
         String bookToCheckIn= input.getUserInput();
 
         int bookIndex = Integer.parseInt(bookToCheckIn) - 1;
 
         if(bookIndex < checkedOutBooks.size()) {
-            library.removeBookFrom(checkedOutBooks, bookIndex, "Thank you! Enjoy the book");
+            library.removeBookFrom(checkedOutBooks, bookIndex, successfulReturnMessage());
         } else {
             printStream.println("That is not a valid book to return.");
         }
+    }
+
+    private String successfulCheckoutMessage() {
+        return "Thank you! Enjoy the book";
+    }
+
+    private String successfulReturnMessage() {
+        return "Thank you for returning the book.";
     }
 }

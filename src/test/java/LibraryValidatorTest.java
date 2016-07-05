@@ -69,7 +69,7 @@ public class LibraryValidatorTest {
 
         libraryValidator.validateIfBookIsCheckedOut();
 
-        verify(printStream).println("Enter the number that corresponds to the book you want to check in:");
+        verify(printStream).println("Enter the number that corresponds to the book you want to return:");
     }
 
     @Test
