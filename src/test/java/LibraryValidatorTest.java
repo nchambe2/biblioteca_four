@@ -36,6 +36,15 @@ public class LibraryValidatorTest {
     }
 
     @Test
+    public void shouldPromptUserToSelectBookWhenCheckingOut() {
+        when(input.getUserInput()).thenReturn("1");
+
+        libraryValidator.validateIfBookIsCheckedIn();
+
+        verify(printStream).println(contains("book you want to checkout:"));
+    }
+
+    @Test
     public void shouldGetUserInputWhenUserHasBeenPromptedToCheckoutABook() {
         when(input.getUserInput()).thenReturn("1");
 
@@ -55,16 +64,7 @@ public class LibraryValidatorTest {
     }
 
     @Test
-    public void shouldDisplayUnSuccessfulCheckoutMessageWhenBookSelectedIsNotCheckedIn() {
-        when(input.getUserInput()).thenReturn("5");
-
-        libraryValidator.validateIfBookIsCheckedIn();
-
-        verify(printStream).println(contains("book you want to checkout:"));
-    }
-
-    @Test
-    public void shouldPromptUserToEnterBookTitleWhenReturningABook() {
+    public void shouldPromptUserToSelectBookWhenReturning() {
         when(input.getUserInput()).thenReturn("1");
 
         libraryValidator.validateIfBookIsCheckedOut();
@@ -91,12 +91,11 @@ public class LibraryValidatorTest {
     }
 
     @Test
-    public void shouldDisplayUnsuccessfulReturnMessageWhenBookCantBeReturned() {
+    public void shouldDisplayUnSuccessfulCheckoutMessageWhenBookSelectedIsNotCheckedIn() {
         when(input.getUserInput()).thenReturn("5");
 
-        libraryValidator.validateIfBookIsCheckedIn();
+        libraryValidator.validateIfBookIsCheckedOut();
 
         verify(printStream).println(contains("That is not a valid book to return."));
     }
-
 }
