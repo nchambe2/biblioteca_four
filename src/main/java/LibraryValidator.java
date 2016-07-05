@@ -28,7 +28,7 @@ public class LibraryValidator {
         int bookIndex = Integer.parseInt(bookToCheckout) - 1;
 
         if(bookIndex < checkedInBooks.size()) {
-            library.removeBookFrom(checkedInBooks, bookIndex);
+            library.removeBookFrom(checkedInBooks, bookIndex, "Thank you! Enjoy the book");
         } else {
             printStream.println("That book is not available.");
         }
@@ -41,7 +41,7 @@ public class LibraryValidator {
         int bookIndex = Integer.parseInt(bookToCheckIn) - 1;
 
         if(bookIndex < checkedOutBooks.size()) {
-            library.removeBookFrom(checkedOutBooks, bookIndex);
+            library.removeBookFrom(checkedOutBooks, bookIndex, "Thank you! Enjoy the book");
         } else {
             printStream.println("That is not a valid book to return.");
         }

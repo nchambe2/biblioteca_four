@@ -1,13 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -79,17 +75,16 @@ public class LibraryTest {
     public void shouldRemoveBookFromCheckedInBooksList() {
         checkedInBooks.add(bookOne);
 
-        library.removeBookFrom(checkedInBooks, 0);
+        library.removeBookFrom(checkedInBooks, 0, "Thank you! Enjoy the book" );
 
         assertThat(checkedInBooks.size(), is(0));
     }
 
     @Test
-    public void shouldDisplaySuccessfulCheckoutMessageWhenBookHasBeenRemovedFromCheckedInBookList() {
+    public void shouldDisplaySuccessMessageWhenBookHasBeenCheckedOut() {
         checkedInBooks.add(bookOne);
-        checkedInBooks.add(bookTwo);
 
-        library.checkout(1);
+        library.removeBookFrom(checkedInBooks, 0, "Thank you! Enjoy the book");
 
         verify(printStream).println("Thank you! Enjoy the book");
     }
@@ -98,16 +93,16 @@ public class LibraryTest {
     public void shouldRemoveBookFromCheckedOutBooksList() {
         checkedOutBooks.add(bookOne);
 
-        library.removeBookFrom(checkedOutBooks, 0);
+        library.removeBookFrom(checkedOutBooks, 0, "Thank you! Enjoy the book");
 
         assertThat(checkedOutBooks.size(), is(0));
     }
-    
-    @Test
-    public void shouldDisplaySuccessfulReturnMessageWhenBookHasBeenReturned() {
-        checkedOutBooks.add(bookThree);
 
-        library.returnBook(0);
+    @Test
+    public void shouldDisplaySuccessMessageWhenBookHasBeenReturned() {
+        checkedOutBooks.add(bookOne);
+
+        library.removeBookFrom(checkedOutBooks, 0, "Thank you for returning the book.");
 
         verify(printStream).println("Thank you for returning the book.");
     }

@@ -60,7 +60,7 @@ public class LibraryValidatorTest {
 
         libraryValidator.validateIfBookIsCheckedIn();
 
-        verify(library).removeBookFrom(checkedInBooks,0);
+        verify(library).removeBookFrom(checkedInBooks,0, "Thank you! Enjoy the book");
     }
 
     @Test
@@ -87,7 +87,7 @@ public class LibraryValidatorTest {
 
         libraryValidator.validateIfBookIsCheckedOut();
 
-        verify(library).removeBookFrom(checkedOutBooks, 0);
+        verify(library).removeBookFrom(checkedOutBooks, 0, "Thank you! Enjoy the book");
     }
 
     @Test
