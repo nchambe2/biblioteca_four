@@ -16,7 +16,6 @@ public class ReturnBookCommand implements Command {
     @Override
     public void run() {
         printStream.println("Enter the number that corresponds to the book you want to return:");
-        //libraryValidator.validateIfBookIsCheckedOut();
         libraryValidator.validate(checkedOutBooks, "Thank you for returning the book.", "This book can not be returned");
     }
 

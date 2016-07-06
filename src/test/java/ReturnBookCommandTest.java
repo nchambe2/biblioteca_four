@@ -33,16 +33,9 @@ public class ReturnBookCommandTest {
         verify(printStream).println(contains("Enter the number that corresponds to the book you want to return:"));
     }
 
-    @Test
-    public void shouldReturnBookWhenRunCommandIsExecuted() {
-
-        returnBookCommand.run();
-
-        verify(libraryValidator).validateIfBookIsCheckedOut();
-    }
 
     @Test
-    public void shouldValidateIfBookCanBeReturnedWhenCommanIsCalled() {
+    public void shouldValidateIfBookCanBeReturnedWhenCommandIsCalled() {
         returnBookCommand.run();
 
         verify(libraryValidator).validate(checkedOutBooks, "Thank you for returning the book.", "This book can not be returned");
