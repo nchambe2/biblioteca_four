@@ -13,13 +13,13 @@ public class LibraryValidator {
         this.printStream = printStream;
     }
 
-    public void validate(List<Book> bookCatalog, String successMessage, String unsuccessfulMessage) {
+    public void validate(List<Book> bookCatalogToRemoveFrom, List<Book> bookCatalogToAddTo, String successMessage, String unsuccessfulMessage) {
         String bookToCheckIn = input.getUserInput();
 
         int bookIndex = Integer.parseInt(bookToCheckIn) - 1;
 
-        if(bookIndex < bookCatalog.size()) {
-            library.removeBookFrom(bookCatalog, bookIndex, successMessage);
+        if(bookIndex < bookCatalogToRemoveFrom.size()) {
+            library.removeBookFrom(bookCatalogToRemoveFrom, bookCatalogToAddTo, bookIndex, successMessage);
         } else {
             printStream.println(unsuccessfulMessage);
         }

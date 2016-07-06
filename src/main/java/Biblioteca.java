@@ -16,13 +16,13 @@ public class Biblioteca {
         checkedOutBooks.add(gameOfThrones);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         Input input = new Input(bufferedReader);
-        Library library = new Library(checkedInBooks, checkedOutBooks, printStream);
+        Library library = new Library(checkedInBooks, printStream);
         Map<String, Command> libraryCommands = new HashMap<>();
         Command quitCommand = new QuitCommand(printStream);
         Command listBookCommand = new ListBookCommand(library);
         LibraryValidator libraryValidator = new LibraryValidator(library, input, printStream);
-        Command checkoutBookCommand = new CheckoutBookCommand(libraryValidator, printStream, checkedInBooks);
-        Command returnBookCommand = new ReturnBookCommand(libraryValidator, printStream, checkedOutBooks);
+        Command checkoutBookCommand = new CheckoutBookCommand(libraryValidator, printStream, checkedInBooks, checkedOutBooks);
+        Command returnBookCommand = new ReturnBookCommand(libraryValidator, printStream, checkedOutBooks, checkedInBooks);
         libraryCommands.put("0", quitCommand);
         libraryCommands.put("1", listBookCommand);
         libraryCommands.put("2", checkoutBookCommand);

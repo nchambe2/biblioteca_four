@@ -17,13 +17,15 @@ public class ReturnBookCommandTest {
     private ReturnBookCommand returnBookCommand;
     private PrintStream printStream;
     private List<Book> checkedOutBooks;
+    private List<Book> checkedInBooks;
 
     @Before
     public void setUp() {
         libraryValidator = mock(LibraryValidator.class);
         printStream = mock(PrintStream.class);
         checkedOutBooks = new ArrayList<>();
-        returnBookCommand = new ReturnBookCommand(libraryValidator, printStream, checkedOutBooks);
+        checkedInBooks = new ArrayList<>();
+        returnBookCommand = new ReturnBookCommand(libraryValidator, printStream, checkedOutBooks, checkedInBooks);
     }
 
     @Test
@@ -38,7 +40,7 @@ public class ReturnBookCommandTest {
     public void shouldValidateIfBookCanBeReturnedWhenCommandIsCalled() {
         returnBookCommand.run();
 
-        verify(libraryValidator).validate(checkedOutBooks, "Thank you for returning the book.", "This book can not be returned");
+        verify(libraryValidator).validate(checkedOutBooks, checkedInBooks, "Thank you for returning the book.", "This book can not be returned");
     }
 
     @Test

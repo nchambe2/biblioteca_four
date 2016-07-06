@@ -3,12 +3,10 @@ import java.util.List;
 
 public class Library {
     private List<Book> checkedInBooks;
-    private List<Book> checkedOutBooks;
     private PrintStream printStream;
 
-    public Library(List<Book> checkedInBooks, List<Book> checkedOutBooks, PrintStream printStream) {
+    public Library(List<Book> checkedInBooks, PrintStream printStream) {
         this.checkedInBooks = checkedInBooks;
-        this.checkedOutBooks = checkedOutBooks;
         this.printStream = printStream;
     }
 
@@ -18,8 +16,9 @@ public class Library {
         }
     }
 
-    public void removeBookFrom(List<Book> bookCatalog, int bookIndex, String successMessage) {
-        bookCatalog.remove(bookIndex);
+    public void removeBookFrom(List<Book> bookCatalogToRemoveFrom, List<Book> bookCatalogToAddTo, int bookIndex, String successMessage) {
+        Book bookToAdd = bookCatalogToRemoveFrom.remove(bookIndex);
+        bookCatalogToAddTo.add(bookToAdd);
         printStream.println(successMessage);
     }
 

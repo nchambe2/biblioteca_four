@@ -17,13 +17,15 @@ public class CheckoutBookCommandTest {
     private LibraryValidator checkoutBookValidator;
     private PrintStream printStream;
     private List<Book> checkedInBooks;
+    private List<Book> checkedOutBooks;
 
     @Before
     public void setUp() {
         checkoutBookValidator = mock(LibraryValidator.class);
         printStream = mock(PrintStream.class);
         checkedInBooks = new ArrayList<>();
-        checkoutBookCommand = new CheckoutBookCommand(checkoutBookValidator, printStream, checkedInBooks);
+        checkedOutBooks = new ArrayList<>();
+        checkoutBookCommand = new CheckoutBookCommand(checkoutBookValidator, printStream, checkedInBooks, checkedOutBooks);
     }
 
     @Test
@@ -44,7 +46,7 @@ public class CheckoutBookCommandTest {
     public void shouldValidateIfBookCanBeCheckedOutWhenCommandIsRun() {
         checkoutBookCommand.run();
 
-        verify(checkoutBookValidator).validate(checkedInBooks, "Thank you! Enjoy the book", "That book can't be checked in.");
+        verify(checkoutBookValidator).validate(checkedInBooks, checkedOutBooks, "Thank you! Enjoy the book", "That book can't be checked in.");
     }
 
 }

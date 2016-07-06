@@ -14,7 +14,6 @@ public class LibraryTest {
     private Library library;
     private Book bookOne;
     private Book bookTwo;
-    private Book bookThree;
     private List<Book> checkedInBooks;
     private PrintStream printStream;
     private List<Book> checkedOutBooks;
@@ -24,11 +23,10 @@ public class LibraryTest {
     public void setUp(){
         bookOne = mock(Book.class);
         bookTwo = mock(Book.class);
-        bookThree = mock(Book.class);
         checkedInBooks = new ArrayList<>();
         checkedOutBooks = new ArrayList<>();
         printStream = mock(PrintStream.class);
-        library = new Library(checkedInBooks, checkedOutBooks, printStream);
+        library = new Library(checkedInBooks, printStream);
     }
 
     @Test
@@ -75,7 +73,7 @@ public class LibraryTest {
     public void shouldRemoveBookFromCheckedInBooksList() {
         checkedInBooks.add(bookOne);
 
-        library.removeBookFrom(checkedInBooks, 0, "Thank you! Enjoy the book" );
+        library.removeBookFrom(checkedInBooks, checkedOutBooks, 0, "Thank you! Enjoy the book" );
 
         assertThat(checkedInBooks.size(), is(0));
     }
@@ -84,7 +82,7 @@ public class LibraryTest {
     public void shouldDisplaySuccessMessageWhenBookHasBeenCheckedOut() {
         checkedInBooks.add(bookOne);
 
-        library.removeBookFrom(checkedInBooks, 0, "Thank you! Enjoy the book");
+        library.removeBookFrom(checkedInBooks, checkedOutBooks, 0, "Thank you! Enjoy the book");
 
         verify(printStream).println("Thank you! Enjoy the book");
     }
@@ -93,7 +91,7 @@ public class LibraryTest {
     public void shouldRemoveBookFromCheckedOutBooksList() {
         checkedOutBooks.add(bookOne);
 
-        library.removeBookFrom(checkedOutBooks, 0, "Thank you! Enjoy the book");
+        library.removeBookFrom(checkedOutBooks, checkedInBooks, 0, "Thank you! Enjoy the book");
 
         assertThat(checkedOutBooks.size(), is(0));
     }
@@ -102,9 +100,27 @@ public class LibraryTest {
     public void shouldDisplaySuccessMessageWhenBookHasBeenReturned() {
         checkedOutBooks.add(bookOne);
 
-        library.removeBookFrom(checkedOutBooks, 0, "Thank you for returning the book.");
+        library.removeBookFrom(checkedOutBooks, checkedInBooks,0, "Thank you for returning the book.");
 
         verify(printStream).println("Thank you for returning the book.");
+    }
+
+    @Test
+    public void shouldAddBookToCheckedInBookListWhenBookIsReturned() {
+        checkedOutBooks.add(bookOne);
+
+        library.removeBookFrom(checkedOutBooks, checkedInBooks, 0, "Thank you for returning the book.");
+
+        assertThat(checkedInBooks.size(), is(1));
+    }
+
+    @Test
+    public void shouldAddBookToCheckedOutBookListWhenBookIscheckedOut() {
+        checkedInBooks.add(bookOne);
+
+        library.removeBookFrom(checkedInBooks, checkedOutBooks, 0, "Thank you for returning the book.");
+
+        assertThat(checkedOutBooks.size(), is(1));
     }
 
 

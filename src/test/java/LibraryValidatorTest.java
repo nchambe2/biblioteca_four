@@ -39,7 +39,7 @@ public class LibraryValidatorTest {
     public void shouldGetUserInputWhenValidateMethodIsCalled() {
         when(input.getUserInput()).thenReturn("1");
 
-        libraryValidator.validate(checkedInBooks, successfulCheckoutMessage(), unsuccessfulCheckOutMessage());
+        libraryValidator.validate(checkedInBooks, checkedOutBooks, successfulCheckoutMessage(), unsuccessfulCheckOutMessage());
 
         verify(input).getUserInput();
 
@@ -49,9 +49,9 @@ public class LibraryValidatorTest {
     public void shouldCheckoutBookWhenBookSelectedIsCheckedIn() {
         when(input.getUserInput()).thenReturn("1");
 
-        libraryValidator.validate(checkedInBooks, successfulCheckoutMessage(), unsuccessfulReturnMessage());
+        libraryValidator.validate(checkedInBooks, checkedOutBooks, successfulCheckoutMessage(), unsuccessfulReturnMessage());
 
-        verify(library).removeBookFrom(checkedInBooks, 0, successfulCheckoutMessage());
+        verify(library).removeBookFrom(checkedInBooks, checkedOutBooks, 0, successfulCheckoutMessage());
     }
 
 
@@ -59,7 +59,7 @@ public class LibraryValidatorTest {
     public void shouldDisplayUnsuccessfulCheckoutMessageWhenBookCantBeCheckedOut() {
         when(input.getUserInput()).thenReturn("5");
 
-        libraryValidator.validate(checkedInBooks, successfulCheckoutMessage(), unsuccessfulReturnMessage());
+        libraryValidator.validate(checkedInBooks, checkedOutBooks,successfulCheckoutMessage(), unsuccessfulCheckOutMessage());
 
         verify(printStream).println(contains(unsuccessfulCheckOutMessage()));
     }
@@ -69,9 +69,9 @@ public class LibraryValidatorTest {
     public void shouldReturnBookWhenBookSelectedIsNotCheckedIn() {
         when(input.getUserInput()).thenReturn("1");
 
-        libraryValidator.validate(checkedOutBooks, successfulReturnMessage(), unsuccessfulReturnMessage());
+        libraryValidator.validate(checkedOutBooks, checkedInBooks, successfulReturnMessage(), unsuccessfulReturnMessage());
 
-        verify(library).removeBookFrom(checkedOutBooks, 0, successfulReturnMessage());
+        verify(library).removeBookFrom(checkedOutBooks, checkedInBooks, 0, successfulReturnMessage());
     }
 
 
@@ -79,7 +79,7 @@ public class LibraryValidatorTest {
     public void shouldDisplayUnsuccessfulReturnMessageWhenBookCantBeReturned() {
         when(input.getUserInput()).thenReturn("5");
 
-        libraryValidator.validate(checkedOutBooks, successfulReturnMessage(), unsuccessfulReturnMessage());
+        libraryValidator.validate(checkedOutBooks, checkedInBooks, successfulReturnMessage(), unsuccessfulReturnMessage());
 
         verify(printStream).println(contains(unsuccessfulReturnMessage()));
     }
